@@ -9,14 +9,14 @@ module.exports = function (grunt) {
 			scripts: {
 				files: 'scripts/<%= pkg.name %>.js',
 				tasks: ['jshint', 'uglify']
-			},			
+			},
 			scsslint: {
 				files: '**/*.scss',
 				tasks: ['scsslint']
 			},
 			sass: {
 				files: '**/*.scss',
-				tasks: ['sass', 'autoprefixer']	
+				tasks: ['sass', 'autoprefixer']
 			}
 		},
 		jshint: {
@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 		},
 		uglify: {
 			options: {
-				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + 
+				banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
 				'<%= grunt.template.today("yyyy-mm-dd") %> */'
 			},
 			build: {
@@ -39,10 +39,10 @@ module.exports = function (grunt) {
 			dist: {
 				files: {
 				  	'public/js/lib.min.js': [
-					/* Here go third-party bowered libraries */
+						'bower_components/jquery/dist/jquery.js'
 					]
 				}
-			}			
+			}
 		},
 		scsslint: {
 			allFiles: [
@@ -80,9 +80,9 @@ module.exports = function (grunt) {
 	                map: true
 	            },
 				src: 'public/css/style.css',
-              	dest: 'public/css/style.css'	            
+              	dest: 'public/css/style.css'
 	        }
-		},	        
+		},
 	});
 
 	grunt.registerTask('default', [

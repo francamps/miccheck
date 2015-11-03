@@ -1,0 +1,6 @@
+bower_components
+.sass-cache
+lib
+node_modules
+public/js/lib.min.js
+public/assets
