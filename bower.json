@@ -1,0 +1,12 @@
+{
+  "name": "miccheck",
+  "version": "0.0.0",
+  "homepage": "https://github.com/francamps/miccheck",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {}
+}
