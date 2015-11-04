@@ -13,7 +13,7 @@ $(function () {
 	var tableState = {
 		show: 10,
 		additionalFile: false,
-		isDone: false,
+		isDoneLoading: false,
 		sortBy: localStorage.sortBy || 'title'
 	};
 
@@ -28,7 +28,7 @@ $(function () {
 		}
 
 		$tableBody.addClass('loading');
-		if (!tableState.isDone) {
+		if (!tableState.isDoneLoading) {
 			$.getJSON(filename, function (json) {
 				// Add articles to store
 				articlesStore = articlesStore.concat(json);
@@ -52,7 +52,7 @@ $(function () {
 	*
 	*/
 	function checkIfDone () {
-		tableState.isDone = (articlesShown.length >= articles.length + moreArticles.length);
+		tableState.isDoneLoading = (articlesStore.length >= articles.length + moreArticles.length);
 	}
 
 	/**
@@ -149,9 +149,9 @@ $(function () {
 	*/
 	function showMoreEvent () {
 		$showMore.click(function () {
-			if (!tableState.isDone) {
-				$(this).addClass('loading');
-				tableState.show += 10;
+			$(this).addClass('loading');
+			tableState.show += 10;
+			if (!tableState.isDoneLoading) {
 				if (tableState.show > articlesStore.length) {
 					tableState.additionalFile = true;
 					loadArticles();
@@ -159,9 +159,13 @@ $(function () {
 					render();
 				}
 			} else {
-				$(this)
-					.html('No more articles')
-					.addClass('disabled');
+				if (tableState.show > articlesStore.length) {
+					$(this)
+						.html('No more articles')
+						.addClass('disabled');
+				} else {
+					render();
+				}
 			}
 		});
 	}
