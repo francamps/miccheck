@@ -153,7 +153,7 @@ $(function () {
 				$(this).addClass('loading');
 				tableState.show += 10;
 				if (tableState.show > articlesStore.length) {
-					tableState.additional = true;
+					tableState.additionalFile = true;
 					loadArticles();
 				} else {
 					render();
