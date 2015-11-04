@@ -40,7 +40,8 @@ module.exports = function (grunt) {
 				files: {
 				  	'public/js/lib.min.js': [
 						'bower_components/jquery/dist/jquery.js',
-						'bower_components/moment/min/moment.min.js'
+						'bower_components/moment/min/moment.min.js',
+						'bower_components/underscore/underscore-min.js'
 					]
 				}
 			}

@@ -89,7 +89,7 @@ $mic-red: rgb(255, 69, 61);
     color: $white;
     background-color: $mic-blue;
     border-bottom: 4px solid $mic-blue-darken;
-    transition: background-color .5s, border .5s, height .5s, line-height .5s;
+    transition: background-color .5s;
     cursor: pointer;
 
     &:not(.disabled):hover {
@@ -97,7 +97,7 @@ $mic-red: rgb(255, 69, 61);
       border-bottom: 0 solid $mic-blue-darken;
       height: 39px;
       line-height: 39px;
-      transition: background-color .5s, border .5s, height .5s, line-height .5s;
+      transition: background-color .5s;
     }
 
     &.disabled {
@@ -111,5 +111,5 @@ $mic-red: rgb(255, 69, 61);
   background: url('../assets/loading.gif');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: auto 90%;  
+  background-size: auto 90%;
 }
