@@ -1,0 +1,111 @@
+// scss-lint:disable PropertySortOrder
+
+$border-grey: #999;
+$light-grey: rgb(247, 247, 247);
+$white: #fff;
+$mic-blue: rgb(33, 193, 255);
+$mic-blue-darken: rgb(42, 162, 224);
+$mic-red: rgb(255, 69, 61);
+
+.article-table {
+  border: 1px solid $border-grey;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  width: 90%;
+  margin: 0 auto;
+
+  .article-table-header {
+    display: block;
+    text-transform: uppercase;
+    background: $mic-red;
+    color: $white;
+
+    .cell::before {
+      font-family: sans-serif;
+      content: 's';
+      transform: rotate(90deg);
+      transition: transform .2s ease-in 0;
+      color: $border-grey;
+      display: inline-block;
+    }
+  }
+
+  .article-row {
+    min-height: 35px;
+    overflow: auto;
+    padding: 10px 20px;
+
+    &.odd {
+      background: $light-grey;
+    }
+  }
+
+  .cell {
+    float: left;
+    display: block;
+    margin-right: .840336%;
+    width: 11%;
+    text-align: left;
+    height: auto;
+    cursor: pointer;
+
+    img {
+      margin-right: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: $mic-blue-darken;
+    }
+
+    a:hover {
+      color: $mic-blue;
+    }
+
+    &:first-child {
+      width: 61%;
+    }
+  }
+
+  .article-table-body {
+    display: block;
+    min-height: 35px;
+  }
+}
+
+.show-more {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+
+  .button {
+    font-family: Montserrat;
+    width: 200px;
+    margin: 0 auto;
+    border-radius: 3px;
+    height: 35px;
+    line-height: 35px;
+    color: $white;
+    background-color: $mic-blue;
+    border-bottom: 4px solid $mic-blue-darken;
+    transition: background-color .5s, border .5s, height .5s, line-height .5s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $mic-blue-darken;
+      border-bottom: 0 solid $mic-blue-darken;
+      height: 39px;
+      line-height: 39px;
+      transition: background-color .5s, border .5s, height .5s, line-height .5s;
+    }
+  }
+}
+
+.loading {
+  background: url('../assets/loading.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 90%;  
+}
+

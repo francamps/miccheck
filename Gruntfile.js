@@ -39,7 +39,8 @@ module.exports = function (grunt) {
 			dist: {
 				files: {
 				  	'public/js/lib.min.js': [
-						'bower_components/jquery/dist/jquery.js'
+						'bower_components/jquery/dist/jquery.js',
+						'bower_components/moment/min/moment.min.js'
 					]
 				}
 			}
