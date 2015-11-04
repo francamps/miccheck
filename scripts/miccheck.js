@@ -14,7 +14,7 @@ $(function () {
 		show: 10,
 		additionalFile: false,
 		isDone: false,
-		sortBy: 'title'
+		sortBy: localStorage.sortBy || 'title'
 	};
 
 	/**
@@ -132,10 +132,12 @@ $(function () {
 	function sortByEvent () {
 		$('.words-header').click(function () {
 			tableState.sortBy = 'words';
+			localStorage.sortBy = 'words';
 			render();
 		});
 		$('.submitted-header').click(function () {
 			tableState.sortBy = 'publish_at';
+			localStorage.sortBy = 'publish_at';
 			render();
 		});
 	}
