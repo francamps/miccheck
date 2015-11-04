@@ -1,14 +1,18 @@
 $(function () {
 	"use strict";
 
-	var filename = 'assets/articles.json';
+	var articles = 'assets/articles.json';
+	var moreArticles = 'assets/more-articles.json';
 
 	var articlesShown = [];
 	var articlesStore = [];
 
+	var tableBody = '.article-table-body';
+
 	var tableState = {
 		show: 10,
-		additional: false
+		additional: false,
+		isDone: false
 	};
 
 	/**
@@ -17,17 +21,27 @@ $(function () {
 	*
 	*/
 	function loadArticles (filename) {
-		$('.article-table-body').addClass('loading');
+		if (!filename) {
+			filename = (!tableState.additional) ? articles : moreArticles;
+		}
+		$(tableBody).addClass('loading');
 		$.getJSON(filename, function (json) {
-			articlesStore = json;
+			articlesStore = articlesStore.concat(json);
 			filterArticles();
 			appendArticles();
+			checkIfDone();
+			$(tableBody).removeClass('loading');
+			$('.show-more > .button').removeClass('loading');
 		}).fail(function() {
-			$(".article-table-body").html('Something went wrong loading the articles.');
-		}).always(function () {
-			$('.article-table-body').removeClass('loading');
+			$(tableBody)
+				.html('Something went wrong loading the articles.')
+				.removeClass('loading');
 			$('.show-more > .button').removeClass('loading');
 		});
+	}
+
+	function checkIfDone () {
+		tableState.isDone = (articlesShown.length >= articles.length + moreArticles.length);
 	}
 
 	/**
@@ -55,7 +69,7 @@ $(function () {
 	*
 	*/
 	function appendArticles () {
-		$(".article-table-body").empty();
+		$(tableBody).empty();
 		$.each(articlesShown, function (i, article) {
 			var oddOrEvenClass = (i % 2 === 0) ? 'even' : 'odd';
 			var row = '<div class="article-row ' + oddOrEvenClass + '">';
@@ -64,7 +78,8 @@ $(function () {
 			row += '<span class="cell">' + getFullName(article) + '</span>';
 			row += '<span class="cell">' + article.words + '</span>';
 			row += '<span class="cell">' + getTimeDelta(article) + '</span></div>';
-			$(".article-table-body").append(row);
+			$(tableBody).append(row);
+			$('.show-more > .button').removeClass('loading');
 		});
 	}
 
@@ -75,13 +90,21 @@ $(function () {
 	*/
 	function showMore () {
 		$('.show-more').click(function () {
-			$(this).find('.button').addClass('loading');
-			tableState.show += 10;
-			if (tableState.show > articlesStore) {
-				// load more files
+			if (!tableState.isDone) {
+				$(this).find('.button').addClass('loading');
+				tableState.show += 10;
+				if (tableState.show > articlesStore.length) {
+					tableState.additional = true;
+					loadArticles();
+				} else {
+					filterArticles();
+					appendArticles();
+				}				
+			} else {
+				$(this).find('.button')
+					.html('No more articles')
+					.addClass('disabled');
 			}
-			filterArticles();
-			appendArticles();
 		});
 	}
 
@@ -90,6 +113,6 @@ $(function () {
 	* Run the thing!
 	*
 	*/
-	loadArticles(filename);
+	loadArticles();
 	showMore();
 }());

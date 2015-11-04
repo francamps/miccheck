@@ -92,12 +92,17 @@ $mic-red: rgb(255, 69, 61);
     transition: background-color .5s, border .5s, height .5s, line-height .5s;
     cursor: pointer;
 
-    &:hover {
+    &:not(.disabled):hover {
       background-color: $mic-blue-darken;
       border-bottom: 0 solid $mic-blue-darken;
       height: 39px;
       line-height: 39px;
       transition: background-color .5s, border .5s, height .5s, line-height .5s;
+    }
+
+    &.disabled {
+      background-color: $mic-blue-darken;
+      cursor: auto;
     }
   }
 }
@@ -108,4 +113,3 @@ $mic-red: rgb(255, 69, 61);
   background-position: center;
   background-size: auto 90%;  
 }
-
