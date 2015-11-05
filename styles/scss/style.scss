@@ -1,10 +1,11 @@
 // scss-lint:disable PropertySortOrder
 
-$border-grey: #999;
+$border-grey: #dcdcdc;
 $light-grey: rgb(247, 247, 247);
 $white: #fff;
 $mic-blue: rgb(33, 193, 255);
 $mic-blue-darken: rgb(42, 162, 224);
+$mic-blue-even-darker: rgb(26, 88, 124);
 $mic-red: rgb(255, 69, 61);
 $mic-granate: rgb(133, 45, 57);
 
@@ -25,7 +26,13 @@ $mic-granate: rgb(133, 45, 57);
     .cell {
       cursor: pointer;
       display: table-cell;
+      text-align: center;
       border: 0;
+    }
+
+    .cell:first-child {
+      vertical-align: middle;
+      text-align: left;
     }
 
     p {
@@ -68,14 +75,14 @@ $mic-granate: rgb(133, 45, 57);
     display: table-row-group;
 
     .cell {
-      border: 1px solid $light-grey;
+      border: 1px solid $border-grey;
     }
   }
 
   .cell {
     display: table-cell;
     vertical-align: middle;
-    width: 9%;
+    width: 11%;
     text-align: left;
     height: auto;
     font-size: 12px;
@@ -83,11 +90,18 @@ $mic-granate: rgb(133, 45, 57);
 
     img {
       margin-right: 10px;
+      display: inline;
+      height: 50px;
+      float: left;
     }
 
     a {
       text-decoration: none;
-      color: $mic-blue-darken;
+      color: $mic-blue-even-darker;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline;
+      vertical-align: top;
     }
 
     a:hover {
@@ -95,8 +109,16 @@ $mic-granate: rgb(133, 45, 57);
     }
 
     &:first-child {
-      width: 64%;
+      width: 58%;
       vertical-align: top;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .author {
+      text-align: left;
     }
   }
 }
@@ -108,23 +130,25 @@ $mic-granate: rgb(133, 45, 57);
   margin-top: 10px;
 
   .button {
-    font-family: Montserrat;
-    width: 200px;
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    width: 160px;
     margin: 0 auto;
     border-radius: 3px;
     height: 35px;
     line-height: 35px;
     color: $white;
-    background-color: $mic-blue;
-    border-bottom: 4px solid $mic-blue-darken;
+    background-color: $mic-blue-darken;
+    border-bottom: 2px solid $mic-blue-even-darker;
     transition: background-color .5s;
     cursor: pointer;
 
     &:not(.disabled):hover {
-      background-color: $mic-blue-darken;
-      border-bottom: 0 solid $mic-blue-darken;
-      height: 39px;
-      line-height: 39px;
+      background-color: $mic-blue-even-darker;
+      border-bottom: 0 solid $mic-blue-even-darker;
+      height: 37px;
+      line-height: 37px;
       transition: background-color .5s;
     }
 

@@ -1,5 +1,5 @@
 .article-table {
-  border: 1px solid #999;
+  border: 1px solid #dcdcdc;
   display: table;
   font-family: sans-serif;
   width: 90%;
@@ -15,7 +15,12 @@
 .article-table .article-table-header .cell {
   cursor: pointer;
   display: table-cell;
+  text-align: center;
   border: 0;
+}
+.article-table .article-table-header .cell:first-child {
+  vertical-align: middle;
+  text-align: left;
 }
 .article-table .article-table-header p {
   display: inline-block;
@@ -51,12 +56,12 @@
   display: table-row-group;
 }
 .article-table .article-table-body .cell {
-  border: 1px solid #f7f7f7;
+  border: 1px solid #dcdcdc;
 }
 .article-table .cell {
   display: table-cell;
   vertical-align: middle;
-  width: 9%;
+  width: 11%;
   text-align: left;
   height: auto;
   font-size: 12px;
@@ -64,17 +69,30 @@
 }
 .article-table .cell img {
   margin-right: 10px;
+  display: inline;
+  height: 50px;
+  float: left;
 }
 .article-table .cell a {
   text-decoration: none;
-  color: #2aa2e0;
+  color: #1a587c;
+  font-weight: 700;
+  font-size: 14px;
+  display: inline;
+  vertical-align: top;
 }
 .article-table .cell a:hover {
   color: #21c1ff;
 }
 .article-table .cell:first-child {
-  width: 64%;
+  width: 58%;
   vertical-align: top;
+}
+.article-table .cell p {
+  text-align: center;
+}
+.article-table .cell .author {
+  text-align: left;
 }
 
 .show-more {
@@ -84,23 +102,25 @@
   margin-top: 10px;
 }
 .show-more .button {
-  font-family: Montserrat;
-  width: 200px;
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: 12px;
+  width: 160px;
   margin: 0 auto;
   border-radius: 3px;
   height: 35px;
   line-height: 35px;
   color: #fff;
-  background-color: #21c1ff;
-  border-bottom: 4px solid #2aa2e0;
+  background-color: #2aa2e0;
+  border-bottom: 2px solid #1a587c;
   transition: background-color .5s;
   cursor: pointer;
 }
 .show-more .button:not(.disabled):hover {
-  background-color: #2aa2e0;
-  border-bottom: 0 solid #2aa2e0;
-  height: 39px;
-  line-height: 39px;
+  background-color: #1a587c;
+  border-bottom: 0 solid #1a587c;
+  height: 37px;
+  line-height: 37px;
   transition: background-color .5s;
 }
 .show-more .button.disabled {

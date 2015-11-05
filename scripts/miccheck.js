@@ -115,11 +115,27 @@ $(function () {
 		});
 	}
 
+	/**
+	*
+	* Count articles shown
+	*
+	*/
+	function countArticles() {
+		$('.count-articles').html(' (' + articlesShown.length + ' shown)');
+	}
+
+	/**
+	*
+	* Generate cells content and row
+	*
+	*/
 	function generateRowContent (article) {
 		var cellSpan = '<div class="cell">';
-		var rowContent = cellSpan + '<img width="50" height="50" src="' + article.image + '"/>';
+		var rowContent = cellSpan + '<img width="50" height="50"' +
+			' src="' + article.image + '"' +
+			' onError="this.onerror=null;this.src=\'./assets/images/no-image.png\';"/>';
 		rowContent += '<a href="' + article.url + '">' + article.title + '</a></div>';
-		rowContent += cellSpan + '<p>' + getFullName(article) + '</p></div>';
+		rowContent += cellSpan + '<p class="author">' + getFullName(article) + '</p></div>';
 		rowContent += cellSpan + '<p>' + article.words + '</p></div>';
 		rowContent += cellSpan + '<p>' + getTimeDelta(article) + '</p></div>';
 		return rowContent;
@@ -145,6 +161,11 @@ $(function () {
 			$(this).addClass('sorted');
 			render();
 		});
+		if (localStorage.sortBy === 'words') {
+			$('.words-header').addClass('sorted');
+		} else if (localStorage.sortBy === 'publish_at') {
+			$('.submitted-header').addClass('sorted');
+		}
 	}
 
 	/**
@@ -184,6 +205,7 @@ $(function () {
 		filterArticles();
 		sortArticles();
 		appendArticles();
+		countArticles();
 	}
 
 	/**
