@@ -41,7 +41,7 @@ module.exports = function (grunt) {
 				  	'public/js/lib.min.js': [
 						'bower_components/jquery/dist/jquery.js',
 						'bower_components/moment/min/moment.min.js',
-						'bower_components/underscore/underscore-min.js'
+						'bower_components/lodash/lodash.min.js'
 					]
 				}
 			}
@@ -59,7 +59,8 @@ module.exports = function (grunt) {
 	    sass: {
 	        dist: {
 	          options: {
-	            style: 'expanded'
+	            style: 'expanded',
+				sourcemap: 'none'
 	          },
 	          files: {
 	            'public/css/style.css': 'styles/scss/style.scss'
@@ -79,7 +80,7 @@ module.exports = function (grunt) {
             },
 	        sourcemap: {
 	            options: {
-	                map: true
+	                map: false
 	            },
 				src: 'public/css/style.css',
               	dest: 'public/css/style.css'

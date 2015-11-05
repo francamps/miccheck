@@ -1,8 +1,9 @@
 $(function () {
 	"use strict";
 
-	var articles = 'assets/articles.json';
-	var moreArticles = 'assets/more-articles.json';
+	var basePath = 'assets/data/';
+	var articles = basePath + 'articles.json';
+	var moreArticles = basePath + 'more-articles.json';
 
 	var articlesStore = [];
 	var articlesShown = [];
@@ -92,7 +93,7 @@ $(function () {
 	function sortArticles () {
 		articlesShown = _.sortBy(articlesShown, function (article) {
 			return article[tableState.sortBy];
-		});
+		}).reverse();
 	}
 
 	/**
@@ -115,12 +116,12 @@ $(function () {
 	}
 
 	function generateRowContent (article) {
-		var cellSpan = '<span class="cell">';
+		var cellSpan = '<div class="cell">';
 		var rowContent = cellSpan + '<img width="50" height="50" src="' + article.image + '"/>';
-		rowContent += '<a href="' + article.url + '">' + article.title + '</a></span>';
-		rowContent += cellSpan + getFullName(article) + '</span>';
-		rowContent += cellSpan + article.words + '</span>';
-		rowContent += cellSpan + getTimeDelta(article) + '</span>';
+		rowContent += '<a href="' + article.url + '">' + article.title + '</a></div>';
+		rowContent += cellSpan + '<p>' + getFullName(article) + '</p></div>';
+		rowContent += cellSpan + '<p>' + article.words + '</p></div>';
+		rowContent += cellSpan + '<p>' + getTimeDelta(article) + '</p></div>';
 		return rowContent;
 	}
 
@@ -133,11 +134,15 @@ $(function () {
 		$('.words-header').click(function () {
 			tableState.sortBy = 'words';
 			localStorage.sortBy = 'words';
+			$('.sorted').removeClass('sorted');
+			$(this).addClass('sorted');
 			render();
 		});
 		$('.submitted-header').click(function () {
 			tableState.sortBy = 'publish_at';
 			localStorage.sortBy = 'publish_at';
+			$('.sorted').removeClass('sorted');
+			$(this).addClass('sorted');
 			render();
 		});
 	}
