@@ -8,15 +8,15 @@ $(function () {
 	var articlesStore = [];
 	var articlesShown = [];
 
-	var $tableBody = $('.article-table-body');
-	var $showMore = $('.show-more > .button');
-
 	var tableState = {
 		show: 10,
 		additionalFile: false,
 		isDoneLoading: false,
 		sortBy: localStorage.sortBy || 'title'
 	};
+
+	var $tableBody = $('.article-table-body');
+	var $showMore = $('.show-more > .button');
 
 	/**
 	*
@@ -88,6 +88,7 @@ $(function () {
 	/**
 	*
 	* Sort articles by given column, only those in display
+	* Descending
 	*
 	*/
 	function sortArticles () {
@@ -106,12 +107,15 @@ $(function () {
 
 		$.each(articlesShown, function (i, article) {
 			var oddOrEvenClass = (i % 2 === 0) ? 'even' : 'odd';
-			var row = '<div class="article-row row-' + i + ' ' + oddOrEvenClass + '"></div>';
+			var row = '<div class="article-row row-' + i +
+				' ' + oddOrEvenClass + '"></div>';
 			$tableBody.append(row);
 
-			$('.row-' + i).html(generateRowContent(article));
+			$('.row-' + i)
+				.html(generateRowContent(article));
 
-			$showMore.removeClass('loading');
+			$showMore
+				.removeClass('loading');
 		});
 	}
 
@@ -121,7 +125,8 @@ $(function () {
 	*
 	*/
 	function countArticles() {
-		$('.count-articles').html(' (' + articlesShown.length + ' shown)');
+		$('.count-articles')
+			.html(' (' + articlesShown.length + ' shown)');
 	}
 
 	/**
@@ -131,13 +136,27 @@ $(function () {
 	*/
 	function generateRowContent (article) {
 		var cellSpan = '<div class="cell">';
+
+		// Article image and fallback
 		var rowContent = cellSpan + '<img width="50" height="50"' +
 			' src="' + article.image + '"' +
-			' onError="this.onerror=null;this.src=\'./assets/images/no-image.png\';"/>';
-		rowContent += '<a href="' + article.url + '">' + article.title + '</a></div>';
-		rowContent += cellSpan + '<p class="author">' + getFullName(article) + '</p></div>';
+			' onError="this.onerror=null;' +
+			'this.src=\'./assets/images/no-image.png\';"/>';
+
+		// Title
+		rowContent += '<a href="' + article.url + '">' +
+			article.title + '</a></div>';
+
+		// Author
+		rowContent += cellSpan + '<p class="author">' +
+			getFullName(article) + '</p></div>';
+
+		// Word count
 		rowContent += cellSpan + '<p>' + article.words + '</p></div>';
+
+		// Publish date delta
 		rowContent += cellSpan + '<p>' + getTimeDelta(article) + '</p></div>';
+
 		return rowContent;
 	}
 
@@ -161,6 +180,7 @@ $(function () {
 			$(this).addClass('sorted');
 			render();
 		});
+		// If sorting is in localStorage, add style to header
 		if (localStorage.sortBy === 'words') {
 			$('.words-header').addClass('sorted');
 		} else if (localStorage.sortBy === 'publish_at') {
@@ -178,13 +198,17 @@ $(function () {
 			$(this).addClass('loading');
 			tableState.show += 10;
 			if (!tableState.isDoneLoading) {
+				// Load more articles
 				if (tableState.show > articlesStore.length) {
 					tableState.additionalFile = true;
 					loadArticles();
+				// Render the store
 				} else {
 					render();
 				}
+			// Everything is loaded
 			} else {
+				// Everything is already displayed
 				if (tableState.show > articlesStore.length) {
 					$(this)
 						.html('No more articles')
