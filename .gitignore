@@ -3,4 +3,4 @@ bower_components
 lib
 node_modules
 public/js/lib.min.js
-public/assets
+public/assets/data
