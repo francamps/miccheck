@@ -15,3 +15,5 @@ To run:
 
     grunt
     open public/index.html
+
+Make sure you've added the proper json files into a directory with the path `public/assets/data`.
